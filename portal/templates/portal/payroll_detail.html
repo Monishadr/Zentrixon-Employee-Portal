@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<section class="py-12 bg-gradient-to-br from-indigo-50 to-white min-h-screen">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-5xl font-extrabold text-center text-indigo-600 mb-8">Payroll Dashboard</h2>
+
+    <!-- Month Filter -->
+    <form method="get" class="mb-6 flex gap-3 items-center justify-center">
+      <label for="month" class="text-gray-700 font-medium">Select Month:</label>
+      <select name="month" id="month" class="border rounded-lg p-2">
+        {% for month in payslip_months %}
+          <option value="{{ month }}" {% if selected_month == month %}selected{% endif %}>{{ month }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">View Payslip</button>
+    </form>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {% for item in summary_items %}
+      <div class="p-6 rounded-xl shadow-lg border-l-4 border-indigo-400 bg-white text-center">
+        <p class="text-gray-600">{{ item.label }}</p>
+        <p class="mt-2 text-2xl font-semibold text-indigo-800">₹{{ item.value|floatformat:0|intcomma }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="bg-white rounded-xl shadow p-8 mb-10 border">
+      <h3 class="text-2xl font-semibold text-center text-gray-700 mb-6">Salary Distribution</h3>
+      <div class="w-48 h-48 mx-auto">
+        <canvas id="salaryChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Payslip Preview -->
+    <div class="bg-white rounded-lg shadow p-6 border mb-10">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+        Payslip Preview – {{ selected_month|default:"--" }} 2025
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 text-sm">
+        <div><strong>Company:</strong> Zentrixon Technologies Pvt. Ltd.</div>
+        <div><strong>Employee:</strong> {{ user.get_full_name }}</div>
+        <div><strong>Emp ID:</strong> ZT{{ user.id }}</div>
+        <div><strong>Designation:</strong> Software Engineer</div>
+        <div><strong>Dept:</strong> IT</div>
+        <div><strong>PAN:</strong> ABCDE1234F</div>
+        <div><strong>UAN:</strong> 123456789012</div>
+        <div><strong>DOJ:</strong> 15-Jan-2024</div>
+        <div><strong>Location:</strong> Bengaluru</div>
+        <div><strong>Pay Period:</strong> 01-{{ selected_month }}-2025 – 30-{{ selected_month }}-2025</div>
+        <div><strong>Bank A/C:</strong> XXXX‑XXXX‑XXXX‑5678</div>
+      </div>
+    </div>
+
+    <!-- Download Buttons -->
+    {% if selected_month %}
+    <div class="bg-white rounded-lg shadow p-6 border flex justify-center gap-4 mt-6">
+      <a href="{% url 'download-payslip' month=selected_month %}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">Download PDF</a>
+      <a href="{% url 'download-payslip-excel' month=selected_month %}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Download Excel</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('salaryChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Basic', 'HRA', 'Allowance', 'Deductions'],
+      datasets: [{
+        data: [
+          {{ salary.basic|default:0 }},
+          {{ salary.hra|default:0 }},
+          {{ salary.allowance|default:0 }},
+          {{ salary.deductions|default:0 }}
+        ],
+        backgroundColor: ['#3B82F6', '#8B5CF6', '#10B981', '#EF4444'],
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } }
+    }
+  });
+</script>
+{% endblock %}

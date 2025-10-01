@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero" style="background-image:url('{% static "images/dev.jpg" %}'); background-size:cover;">
+  <div class="hero-content">
+    <h1>Frontend Developer</h1>
+    <p>At Zentrixon, our Frontend Developers craft beautiful, responsive user interfaces.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Role Overview</h2>
+    <p>You will build modern web applications using React, Vue, or Angular. Join us in creating seamless user experiences.</p>
+
+    <h3>Key Responsibilities</h3>
+    <ul>
+      <li>Develop and maintain front-end codebases.</li>
+      <li>Collaborate with designers to implement UI/UX.</li>
+      <li>Optimize performance and accessibility.</li>
+      <li>Write unit and integration tests.</li>
+    </ul>
+
+    <h3>Required Skills</h3>
+    <ul>
+      <li>Expertise in HTML5, CSS3, JavaScript (ES6+).</li>
+      <li>Strong experience with React/Vue/Angular.</li>
+      <li>Familiarity with RESTful APIs and version control.</li>
+      <li>Attention to detail and responsive design.</li>
+    </ul>
+
+    
+    <a href="{% url 'apply-frontend' %}" class="btn">Apply for Frontend Developer</a>
+
+  </div>
+</section>
+{% endblock %}

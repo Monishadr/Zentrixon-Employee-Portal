@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1>Explore Careers at <span class="highlight">Zentrixon</span></h1>
+    <p>Join a team of innovators building the future.</p>
+  </div>
+</section>
+
+<section class="card-container">
+  <a href="{% url 'frontend-detail' %}" class="card">
+    <img src="{% static 'images/dev.jpg' %}" alt="Frontend Developer">
+    <div class="card-content">
+      <h3>Frontend Developer</h3>
+      <p>Build responsive UIs with modern JavaScript frameworks.</p>
+    </div>
+  </a>
+
+  <a href="{% url 'ml-detail' %}" class="card">
+    <img src="{% static 'images/ml.jpg' %}" alt="AI/ML Engineer">
+    <div class="card-content">
+      <h3>AI/ML Engineer</h3>
+      <p>Develop intelligent systems and predictive models.</p>
+    </div>
+  </a>
+</section>
+
+{% endblock %}

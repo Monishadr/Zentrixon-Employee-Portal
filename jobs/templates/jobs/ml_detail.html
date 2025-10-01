@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero" style="background-image:url('{% static "images/ml-hero.jpg" %}'); background-size:cover;">
+  <div class="hero-content">
+    <h1>AI/ML Engineer</h1>
+    <p>Join our team to build intelligent systems that drive business value.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Role Overview</h2>
+    <p>As an AI/ML Engineer, you’ll design and implement machine learning models at scale.</p>
+
+    <h3>Key Responsibilities</h3>
+    <ul>
+      <li>Develop data pipelines and train predictive models.</li>
+      <li>Collaborate with data scientists and engineers.</li>
+      <li>Deploy and monitor models in production.</li>
+      <li>Perform experiments to improve accuracy.</li>
+    </ul>
+
+    <h3>Required Skills</h3>
+    <ul>
+      <li>Proficiency in Python and ML libraries (TensorFlow, PyTorch).</li>
+      <li>Experience with data preprocessing and feature engineering.</li>
+      <li>Knowledge of cloud platforms (AWS, GCP, Azure).</li>
+      <li>Strong problem-solving and analytical skills.</li>
+    </ul>
+
+    
+    <a href="{% url 'apply-ml' %}" class="btn">Apply for AI/ML Engineer</a>
+
+  </div>
+</section>
+{% endblock %}

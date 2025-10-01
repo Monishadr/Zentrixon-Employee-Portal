@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="portal-hero section bg-light">
+  <div class="container text-center py-10">
+    <h1 class="text-4xl font-bold mb-2 text-primary">Employee Portal</h1>
+    <p class="text-lg text-gray-600">Access internal tools and resources</p>
+  </div>
+</section>
+<section class="portal-cards section">
+  <div class="container space-y-6 mt-10">
+    
+    <div class="card w-full shadow-lg rounded-xl p-6 text-center transition-transform hover:-translate-y-1 hover:shadow-2xl bg-white">
+      <img src="{% static 'icons/leave.jpg' %}" alt="Leave" class="mx-auto h-12 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Leave Management</h3>
+      <p class="text-gray-600 mb-4">Apply for and track your leave status.</p>
+      <a href="{% url 'leave-detail' %}" class="btn btn-primary">Manage Leaves</a>
+    </div>
+
+    <div class="card w-full shadow-lg rounded-xl p-6 text-center transition-transform hover:-translate-y-1 hover:shadow-2xl bg-white">
+      <img src="{% static 'icons/payroll.jpg' %}" alt="Payroll" class="mx-auto h-12 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Payroll</h3>
+      <p class="text-gray-600 mb-4">View your salary, payslips, and more.</p>
+      <a href="{% url 'payroll-detail' %}" class="btn btn-primary">View Payroll</a>
+    </div>
+
+    <div class="card w-full shadow-lg rounded-xl p-6 text-center transition-transform hover:-translate-y-1 hover:shadow-2xl bg-white">
+      <img src="{% static 'icons/reviews.png' %}" alt="Reviews" class="mx-auto h-12 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Performance Reviews</h3>
+      <p class="text-gray-600 mb-4">Evaluations and feedback from your manager.</p>
+      <a href="{% url 'reviews-detail' %}" class="btn btn-primary">View Reviews</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="portal-hero">
+  <div class="hero-content">
+    <h1>Employee Portal</h1>
+    <p>Welcome back! Here are your quick-access tools.</p>
+  </div>
+</section>
+
+<section class="portal-cards">
+  <div class="card-grid">
+    <div class="card">
+      <h3>Leave Management</h3>
+      <p>Apply for and track your leave status.</p>
+      <a href="#" class="btn">Manage Leaves</a>
+    </div>
+    <div class="card">
+      <h3>Payroll</h3>
+      <p>View your salary, payslips, and more.</p>
+      <a href="#" class="btn">View Payroll</a>
+    </div>
+    <div class="card">
+      <h3>Performance Reviews</h3>
+      <p>Evaluations from your manager.</p>
+      <a href="#" class="btn">View Reviews</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

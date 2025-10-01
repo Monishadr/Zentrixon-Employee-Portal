@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">MEET OUR TEAM</h2>
+    <div class="card-grid">
+      <div class="card" onclick="window.location.href='{% url 'team-category' 'Frontend' %}'">
+        <img src="{% static 'images/team1.jpg' %}" alt="Frontend Developers">
+        <h3>Frontend Developers</h3>
+      </div>
+      <div class="card" onclick="window.location.href='{% url 'team-category' 'Backend' %}'">
+        <img src="{% static 'images/team2.jpg' %}" alt="Backend Developers">
+        <h3>Backend Developers</h3>
+      </div>
+      <div class="card" onclick="window.location.href='{% url 'team-category' 'QA' %}'">
+        <img src="{% static 'images/team3.jpg' %}" alt="Quality Analysts">
+        <h3>Quality Analysts</h3>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

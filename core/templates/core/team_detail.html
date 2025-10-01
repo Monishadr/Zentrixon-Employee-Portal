@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .team-container {
+        background: linear-gradient(to right, #e3f2fd, #e8f5e9);
+        padding: 3rem 0;
+        border-radius: 20px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-controls {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .filter-controls input,
+    .filter-controls select {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 0 0.5rem;
+        width: 250px;
+    }
+
+    .team-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .team-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        width: 250px;
+        text-align: center;
+        padding: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        animation: fadeInUp 0.6s ease forwards;
+        display: none;
+    }
+
+    .team-card.show {
+        display: block;
+    }
+
+    .team-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .team-image {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 4px solid #2196f3;
+    }
+
+    .team-name {
+        font-weight: 600;
+        color: #0d47a1;
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .team-role {
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .team-type {
+        font-size: 0.85rem;
+        color: #2e7d32;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="container mt-4 team-container">
+    <h2 class="text-center mb-4">Meet the {{ team_type }} Team</h2>
+
+    <div class="filter-controls">
+        <input type="text" id="searchBox" placeholder="Search by name or role...">
+        <select id="roleDropdown">
+            <option value="">All Roles</option>
+            {% for team in ourteams %}
+                <option value="{{ team.role }}">{{ team.role }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="row team-row" id="teamGrid">
+        {% for team in ourteams %}
+        <a href="{{ team.link }}" target="_blank" class="team-card" 
+           data-name="{{ team.name|lower }}" 
+           data-role="{{ team.role|lower }}">
+            <img src="{{ team.image.url }}" class="team-image" alt="{{ team.name }}">
+            <div class="team-card-body">
+                <h5 class="team-name">{{ team.name }}</h5>
+                <p class="team-role">{{ team.role }}</p>
+                <p class="team-type">{{ team.team_name }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchBox');
+        const roleDropdown = document.getElementById('roleDropdown');
+        const cards = document.querySelectorAll('.team-card');
+
+        function filterCards() {
+            const search = searchInput.value.toLowerCase();
+            const selectedRole = roleDropdown.value.toLowerCase();
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const role = card.getAttribute('data-role');
+
+                const matchesSearch = name.includes(search) || role.includes(search);
+                const matchesRole = !selectedRole || role === selectedRole;
+
+                if (matchesSearch && matchesRole) {
+                    card.classList.add('show');
+                } else {
+                    card.classList.remove('show');
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        roleDropdown.addEventListener('change', filterCards);
+
+        // Show all cards initially
+        cards.forEach(card => card.classList.add('show'));
+    });
+</script>
+
+{% endblock content %}

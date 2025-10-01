@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="form-hero">
+  <div class="hero-content">
+    <h1>Apply for {{ job_title }}</h1>
+    <p>Fill in your details to apply for this position.</p>
+  </div>
+</section>
+
+<section class="resume-box">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-block">
+      <label for="id_name">Full Name</label>
+      {{ form.name }}
+    </div>
+
+    <div class="form-block">
+      <label for="id_email">Email Address</label>
+      {{ form.email }}
+    </div>
+
+    <div class="form-block">
+      <label for="id_phone">Phone Number</label>
+      {{ form.phone }}
+    </div>
+
+    <div class="form-block">
+      <label for="id_resume">Upload Resume</label>
+      {{ form.resume }}
+    </div>
+
+    <div class="form-block">
+      <label for="id_cover_letter">Cover Letter</label>
+      {{ form.cover_letter }}
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn-primary">Submit Application</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

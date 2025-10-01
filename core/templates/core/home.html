@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to <span class="highlight">Zentrixon Technologies</span></h1>
+    <p>Empowering Digital Innovation through Cutting-Edge Solutions</p>
+    <a href="/careers/" class="btn">Join Our Team</a>
+  </div>
+</section>
+<section class="team">
+  <h2 class="section-title">MEET OUR CORE MEMBERS</h2>
+  <div class="team-grid">
+
+    <a href="https://www.linkedin.com/in/alicejohnson123" target="_blank" style="text-decoration: none; color: inherit;">
+      <div class="team-card">
+        <img src="{% static 'images/Fashion Men Photos - Download Free High-Quality Pictures _ Freepik.jpeg' %}" alt="Alice Johnson">
+        <h3>Alice Johnson</h3>
+        <p>CEO & Founder</p>
+      </div>
+    </a>
+
+    <a href="https://github.com/rajmehta" target="_blank" style="text-decoration: none; color: inherit;">
+      <div class="team-card">
+        <img src="{% static 'images/download.jpeg' %}" alt="Raj Mehta">
+        <h3>Raj Mehta</h3>
+        <p>CTO</p>
+      </div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/sophialiu456" target="_blank" style="text-decoration: none; color: inherit;">
+      <div class="team-card">
+        <img src="{% static 'images/30s businesswoman in isolated transparent….jpeg' %}" alt="Sophia Liu">
+        <h3>Sophia Liu</h3>
+        <p>Lead Designer</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+{% endblock %}
